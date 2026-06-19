@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.0] — em produção
+
+### Adicionado
+- Painel admin "Zyrion SEO" em Configurações com 3 abas: Status, Configurações e Log IndexNow
+- Todas as configurações migradas de constantes PHP para WordPress Options API (`zyrion_seo_options`)
+- Aba Status: checklist visual de todos os módulos ativos com links rápidos
+- Aba Configurações: campos editáveis (nome do site, chave IndexNow, URLs de política, redes sociais) e toggles on/off por módulo
+- Aba Log IndexNow: tabela com data/hora, URL e status HTTP de cada ping; array circular de até 50 entradas; botão "Limpar log"
+- IndexNow agora usa `blocking: true` para capturar o status HTTP da resposta e registrar no log
+- Módulo de Performance com 6 itens controláveis individualmente pelo painel:
+  - Remover emoji scripts/CSS (ativo por padrão)
+  - Remover embed JS (oEmbed)
+  - Remover jQuery Migrate (frontend)
+  - Limpar wp_head (RSD, wlwmanifest, shortlink, X-Pingback, generator)
+  - Remover versão de assets (?ver=x.x)
+  - Desabilitar XML-RPC
+
+### Alterado
+- Constantes hardcoded (`ZYRION_SITE_NAME`, `ZYRION_INDEXNOW_KEY`, etc.) substituídas por valores lidos de `get_option('zyrion_seo_options')` com fallback para os mesmos valores anteriores
+
+---
+
 ## [2.3] — em produção
 
 ### Adicionado
