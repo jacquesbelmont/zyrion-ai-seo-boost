@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Zyrion AI & SEO Boost
  * Description: Complementa o Yoast SEO (versão gratuita) sem duplicar o que ele já faz nativamente: (1) libera crawlers de IA no robots.txt, (2) enriquece o schema Organization que o Yoast já gera (sem criar um segundo objeto), (3) gera sitemap de notícias no padrão Google News, (4) avisa o IndexNow (Bing/Yandex) a cada publicação — alternativas gratuitas aos recursos "News SEO" e "Indexar agora" do Yoast Premium.
- * Version: 2.2
+ * Version: 2.3
  * Author: Zyrion
  * Text Domain: zyrion-ai-seo-boost
  *
@@ -14,6 +14,52 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+
+// Auto-update via GitHub
+add_filter('pre_set_site_transient_update_plugins', function ($transient) {
+    if (empty($transient->checked)) {
+        return $transient;
+    }
+
+    $plugin_file = 'zyrion-ai-seo-boost/zyrion-ai-seo-boost.php';
+    $current_version = $transient->checked[$plugin_file] ?? null;
+
+    if (!$current_version) {
+        return $transient;
+    }
+
+    $remote = get_transient('zyrion_update_info');
+    if ($remote === false) {
+        $response = wp_remote_get(
+            'https://raw.githubusercontent.com/jacquesbelmont/zyrion-ai-seo-boost/main/update-info.json',
+            ['timeout' => 10, 'headers' => ['Accept' => 'application/json']]
+        );
+        if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
+            return $transient;
+        }
+        $remote = json_decode(wp_remote_retrieve_body($response));
+        set_transient('zyrion_update_info', $remote, 12 * HOUR_IN_SECONDS);
+    }
+
+    if ($remote && version_compare($current_version, $remote->version, '<')) {
+        $transient->response[$plugin_file] = (object) [
+            'slug'        => $remote->slug,
+            'plugin'      => $plugin_file,
+            'new_version' => $remote->version,
+            'url'         => $remote->homepage,
+            'package'     => $remote->download_url,
+        ];
+    }
+
+    return $transient;
+});
+
+// Limpa cache de update ao verificar manualmente
+add_action('upgrader_process_complete', function ($upgrader, $options) {
+    if ($options['type'] === 'plugin') {
+        delete_transient('zyrion_update_info');
+    }
+}, 10, 2);
 
 define('ZYRION_SITE_NAME', 'Zyrion');
 define('ZYRION_SITE_URL', 'https://zyrionbrazil.com/');

@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.3] — em produção
+
+### Adicionado
+- Auto-update via GitHub: o WordPress detecta novas versões automaticamente
+  consultando `update-info.json` no repositório público. Cache de 12h para
+  não sobrecarregar a API do GitHub.
+- `update-info.json`: arquivo de metadados de versão lido pelo mecanismo de update.
+
+---
+
 ## [2.2] — em produção
 
 ### Adicionado

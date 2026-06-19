@@ -1,0 +1,14 @@
+{
+  "name": "Zyrion AI & SEO Boost",
+  "slug": "zyrion-ai-seo-boost",
+  "version": "2.2",
+  "author": "Zyrion",
+  "homepage": "https://github.com/jacquesbelmont/zyrion-ai-seo-boost",
+  "download_url": "https://github.com/jacquesbelmont/zyrion-ai-seo-boost/archive/refs/heads/main.zip",
+  "requires": "6.0",
+  "tested": "6.8",
+  "requires_php": "7.4",
+  "sections": {
+    "description": "Complementa o Yoast SEO gratuito com News Sitemap, IndexNow e schema enriquecido para Google News e crawlers de IA."
+  }
+}
