@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2] — em produção
+
+### Adicionado
+- Schema Article: campo `isAccessibleForFree: true` via filtro `wpseo_schema_article`
+  (o Yoast não inclui esse campo por padrão na versão gratuita)
+
+---
+
 ## [2.1] — em produção
 
 ### Adicionado
