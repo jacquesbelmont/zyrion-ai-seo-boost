@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Zyrion AI & SEO Boost
  * Description: Complementa o Yoast SEO (versão gratuita) sem duplicar o que ele já faz nativamente: (1) libera crawlers de IA no robots.txt, (2) enriquece o schema Organization que o Yoast já gera (sem criar um segundo objeto), (3) gera sitemap de notícias no padrão Google News, (4) avisa o IndexNow (Bing/Yandex) a cada publicação — alternativas gratuitas aos recursos "News SEO" e "Indexar agora" do Yoast Premium.
- * Version: 2.0
+ * Version: 2.1
  * Author: Zyrion
  * Text Domain: zyrion-ai-seo-boost
  *
@@ -59,6 +59,7 @@ add_filter('wpseo_schema_organization', function ($data) {
     $data['@type'] = 'NewsMediaOrganization';
     $data['knowsAbout'] = ['Notícias do Brasil', 'Atualidades', 'Jornalismo digital'];
     $data['publishingPrinciples'] = ZYRION_EDITORIAL_POLICY_URL;
+    $data['correctionsPolicy']    = 'https://zyrionbrazil.com/corrigir-erros/';
 
     return $data;
 });

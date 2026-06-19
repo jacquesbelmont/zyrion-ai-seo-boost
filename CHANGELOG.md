@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1] — em produção
+
+### Adicionado
+- Schema Organization: campo `correctionsPolicy` apontando para
+  `https://zyrionbrazil.com/corrigir-erros/`
+
+---
+
 ## [2.0] — em produção
 
 ### Adicionado
